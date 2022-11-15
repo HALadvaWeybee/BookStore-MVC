@@ -33,6 +33,7 @@ app.UseRouting();
 
 app.UseEndpoints(endpoint =>
 {
+    // tell our application for the use controller and action method
     endpoint.MapDefaultControllerRoute();
     /*endpoint.MapGet("/", async context =>
     {
