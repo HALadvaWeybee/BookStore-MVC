@@ -4,9 +4,20 @@ namespace Web.BookStore.Controllers
 {
     public class HomeController: Controller
     {
-        public string Index()
+        public ViewResult Index()
         {
-            return "this is my application";
+            return View();  
+            //var obj = new { id = 1, name = "test" };
+            //return View("AboutUS",obj);
+            //return View("../../TempView/Himanshu");
+        }
+        public ViewResult AboutUs()
+        {
+            return View();
+        }
+        public ViewResult ContactUs()
+        {
+            return View();
         }
     }
 }
