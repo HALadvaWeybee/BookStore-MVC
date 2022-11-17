@@ -14,17 +14,17 @@ namespace Web.BookStore.Controllers
         }
         public ViewResult GetAllBooks()
         {
-            var data =  _bookRepository.GetAllBooks();
-            return View();
+            var data =  _bookRepository?.GetAllBooks();
+            return View(data);
         }
         public ViewResult GetBook(int id)
         {
-            var data =  _bookRepository.GetBookByID(id);
+            var data =  _bookRepository?.GetBookByID(id);
             return View();
         }
         public ViewResult SearchBook(string BookName, string AuthorName)
         {
-            var data =  _bookRepository.SearchBook(BookName, AuthorName);
+            var data =  _bookRepository?.SearchBook(BookName, AuthorName);
             return View();
         }
     }
