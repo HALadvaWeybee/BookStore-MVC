@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Dynamic;
+using Microsoft.AspNetCore.Mvc;
 using Web.BookStore.Models;
 using Web.BookStore.Repositery;
 
@@ -8,19 +9,27 @@ namespace Web.BookStore.Controllers
     {
         private readonly BookRepository? _bookRepository = null;
 
+        [ViewData]
+        public string Title {get; set;}
+
         public BookController()
         {
             _bookRepository = new BookRepository();
         }
         public ViewResult GetAllBooks()
         {
+            Title = "All Books";
             var data =  _bookRepository?.GetAllBooks();
             return View(data);
         }
         public ViewResult GetBook(int id)
         {
-            var data =  _bookRepository?.GetBookByID(id);
-            return View();
+            dynamic data  = new ExpandoObject();
+            data.book = _bookRepository?.GetBookByID(id);
+            data.ownerName = "himanshu ladva";
+
+            Title = "Book Detail " + data.book?.Title;
+            return View(data);
         }
         public ViewResult SearchBook(string BookName, string AuthorName)
         {
@@ -29,3 +38,4 @@ namespace Web.BookStore.Controllers
         }
     }
 }
+

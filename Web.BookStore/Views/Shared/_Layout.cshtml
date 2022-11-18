@@ -1,13 +1,16 @@
 ﻿<!DOCTYPE html>
 
 <html>
+
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Book Store application</title>
+    <title>@ViewData["Title"] | Book Store application</title>
     <link href="~/sass/Site.min.css" rel="stylesheet" />
     <link href="~/lib/twitter-bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
+
 <body>
+
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -16,8 +19,8 @@
                     <img src="~/images/person3.jpg" asp-append-version="true" width="50" height="50" />
                     Book Store
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
@@ -30,16 +33,16 @@
                     </ul>
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/aboutus">About</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="aboutus">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/home/contactus">Contact</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="contactus">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="/book/getallbooks">All Books</a>
+                            <a class="nav-link text-dark" asp-controller="Book" asp-action="getallbooks">All Books</a>
                         </li>
                     </ul>
 
@@ -47,9 +50,12 @@
             </div>
         </nav>
     </header>
+
+    @RenderSection("breadcrumb", required:false)
     <main role="main">
-       @RenderBody()
+        @RenderBody()
     </main>
+
     <footer class="border-top footer text-muted text-center mt-4">
         <div class="container">
             Copyright &copy; Book Store @DateTime.Now.Year
@@ -57,4 +63,12 @@
     </footer>
 </body>
 <script src="~/lib/jquery/jquery.min.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.esm.min.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.esm.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.min.js"></script>
+<script src="~/lib/twitter-bootstrap/js/bootstrap.js"></script>
+
+@RenderSection("scripts", required:false)
 </html>

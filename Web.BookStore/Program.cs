@@ -48,8 +48,9 @@ app.UseStaticFiles(new StaticFileOptions()
 
 app.UseEndpoints(endpoint =>
 {
+   endpoint.MapControllerRoute(name:"Default", pattern:"{controller=Home}/{action=Index}/{id?}");
     // tell our application for the use controller and action method
-    endpoint.MapDefaultControllerRoute();
+    // endpoint.MapDefaultControllerRoute();
     /*endpoint.MapGet("/", async context =>
     {
        

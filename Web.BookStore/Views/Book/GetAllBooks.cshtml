@@ -1,8 +1,8 @@
-﻿@using Web.BookStore.Models;
-@model IEnumerable<BookModel>;
-@{
-    Layout = "_Layout";
+﻿@{
+    // sending data view to layout
+    @* ViewData["Title"] ="All Books"; *@
 }
+@* @model IEnumerable<BookModel>; *@
 
 <div class="container">
     <h3 class="display-4">All Books</h3>
@@ -21,7 +21,7 @@
                     <h3 class="card-title">@book.Title</h3>
                     <p class="card-text">@book.Description</p>
                     <div class="btn-group">
-                        <a href="#" class="btn btn-sm btn-outline-secondary">View Details</a>
+                        <a href="/book/getbook/@book.Id" class="btn btn-sm btn-outline-secondary">View Details</a>
                     </div>
                     <small class="text-muted">@book.Author</small>
                 </div>

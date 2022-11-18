@@ -23,15 +23,15 @@ namespace Web.BookStore.Repositery
         {
             return new List<BookModel>()
             {
-                new BookModel() { Id = 1,Title = "MVC", Author = "Ram", Description = "This is Description of book"},
-                new BookModel() { Id = 2, Title = "PHY", Author = "lashman", Description = "This is Description of book"},
-                new BookModel() { Id = 3, Title = "COM", Author = "bharat", Description = "This is Description of book"},
-                new BookModel() { Id = 4, Title = "FREM", Author = "shratugan", Description = "This is Description of book"},
-                new BookModel() { Id = 5, Title = "ASD", Author = "janki", Description = "This is description of book"},
-                new BookModel() { Id = 6, Title = "CDF", Author = "kausalya", Description = "This is description of book"},
-                new BookModel() { Id = 7, Title = "YUI", Author = "sakuni", Description = "This is description of book"},
-                new BookModel() { Id = 8, Title = "WER", Author = "kansh", Description = "This is description of book"},
-                new BookModel() { Id = 9, Title = "QAZ", Author = "ravan", Description = "This is description of book"},
+                new BookModel() { Id = 1,Title = "MVC", Author = "Ram", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 2, Title = "PHY", Author = "lashman", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 3, Title = "COM", Author = "bharat", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 4, Title = "FREM", Author = "shratugan", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 5, Title = "ASD", Author = "janki", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 6, Title = "CDF", Author = "kausalya", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 7, Title = "YUI", Author = "sakuni", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 8, Title = "WER", Author = "kansh", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
+                new BookModel() { Id = 9, Title = "QAZ", Author = "ravan", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
             };
         }
     }

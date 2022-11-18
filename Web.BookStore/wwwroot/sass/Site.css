@@ -1,4 +1,4 @@
-﻿.logo {
+.logo {
   width: 50px;
   height: 50px;
 }
@@ -65,13 +65,14 @@ body {
 
 .footer {
   position: absolute;
+  margin-top: 50px;
+  overflow: hidden;
   bottom: 0;
-  width: 100%;
+  max-width: 100%;
   white-space: nowrap;
   line-height: 60px;
-  /* Vertically center the text there */
 }
 
 .membership-img {
   width: 80%;
-}
+}/*# sourceMappingURL=Site.css.map */

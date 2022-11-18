@@ -1,12 +1,23 @@
 ﻿@{
-    Layout = "_Layout";
+    var data = ViewBag.Data;    
+    var data2 = ViewData["properties"] as BookModel;
+    var data3 = ViewData["book"] as BookModel;
+    // sending data view to layout
+    @* ViewData["Title"] ="Home"; *@
 }
 
 <section class="jumbotron text-center">
     <div class="container">
-        <h1>Welcome to bookStore</h1>
+        <h1>Welcome to National Library @ViewData["CustomName"]</h1>
+        <h2>ID = @data3.Id Author = @data3.Author</h2>
+        @* <h1>Hello @ViewData["name"]</h1>
+        <h1>@data2?.Id  @data2?.Title</h1> *@
         <p class="lead text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            @* @data.id @data.name <br>
+            @ViewBag.Type.Id
+            @ViewBag.Type.Title *@
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua.
             Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
         </p>
         <p>
@@ -21,7 +32,9 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="image" aria-label="Placeholder: Thumbnail">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
+                        xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"
+                        role="image" aria-label="Placeholder: Thumbnail">
                         <title>Placeholder</title>
                         <rect width="100%" height="100%" fill="#55595c"></rect>
                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
@@ -38,7 +51,9 @@
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="image" aria-label="Placeholder: Thumbnail">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
+                        xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"
+                        role="image" aria-label="Placeholder: Thumbnail">
                         <title>Placeholder</title>
                         <rect width="100%" height="100%" fill="#55595c"></rect>
                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
@@ -55,7 +70,9 @@
             </div>
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="image" aria-label="Placeholder: Thumbnail">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
+                        xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false"
+                        role="image" aria-label="Placeholder: Thumbnail">
                         <title>Placeholder</title>
                         <rect width="100%" height="100%" fill="#55595c"></rect>
                         <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
@@ -77,77 +94,10 @@
 
 </div>
 
-
-    <!-- <h1>Hello World i am himanshu</h1>
-     <p>i am a programmer</p>
-
-     <h1>@DateTime.Now.ToString("dd-mm-yy")</h1>
-     <h1>Sum = @(3 + 5)</h1>
-
-    @{
-        int a = 5;
-        int b = 6;
-        int c = a + b;
-    }
-
-     <h1>Total is @c</h1>
-     <h1>My Email Id = himanshuladva0587@gmail.com</h1>
-     This is a escape syntax
-     <h1>My Insta Acc = @@ladva.himanshu</h1>
-
-     Conditional statement
-    @{
-        int e = 4;
-        int f = 0;
-    }
-    @if (e > 2)
-    {
-        e++;
-                 <h2>Hello i am in this is @e</h2>
-    }
-    else if (e < 2)
-    {
-                 <h2>Hello i am in else if block</h2>
-    }
-
-     <h1>the actual e is = @(e == 4 ? f = 2 : f = 10)</h1>
-     <h1>Value of f is @f</h1>
-
-    @switch (e)
-    {
-        case 1:
-                             <h1>The item is 1</h1>
-            break;
-        case 2:
-                             <h1>The item is 2</h1>
-            break;
-        case 3:
-                             <h1>The item is 3</h1>
-            break;
-        case 4:
-                             <h1>The item is 4</h1>
-            break;
-        case 5:
-                             <h1>The item is 5</h1>
-            break;
-    }
-
-     For and foreach loop
-    @for (int i = 0; i < 5; i++)
-    {
-                 <h3>Hello Himanshu</h3>
-    }
-    @{
-        List<int> list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    }
-
-    @foreach (int i in list)
-    {
-                 <h3>@i</h3>
-    }-->
-
+@section scripts {
 <script>
     $(document).ready(() => {
-        //alert("Hello Ladva how are you!");
+        //alert("Hello Ladva how are you!"); 
     })
 </script>
+}
