@@ -10,7 +10,7 @@ namespace Web.BookStore.Controllers
         private readonly BookRepository? _bookRepository = null;
 
         [ViewData]
-        public string Title {get; set;}
+        public string? Title {get; set;}
 
         public BookController()
         {
@@ -22,6 +22,8 @@ namespace Web.BookStore.Controllers
             var data =  _bookRepository?.GetAllBooks();
             return View(data);
         }
+
+        [Route("book-detail/{id}", Name="BookDetailRoute")]
         public ViewResult GetBook(int id)
         {
             dynamic data  = new ExpandoObject();

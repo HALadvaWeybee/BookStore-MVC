@@ -7,11 +7,11 @@ namespace Web.BookStore.Controllers
     public class HomeController: Controller
     {
         [ViewData]
-        public string CustomName {get; set;}
+        public string? CustomName {get; set;}
         [ViewData]
-        public string Title {get; set;}
+        public string? Title {get; set;}
         [ViewData]
-        public BookModel Book { get; set;}
+        public BookModel? Book { get; set;}
         public ViewResult Index()
         {
             //view data attribute
