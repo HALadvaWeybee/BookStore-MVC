@@ -1,7 +1,7 @@
 ﻿@* @model BookModel; *@
 @{
     // sending data view to layout
-    ViewData["Title"] ="Book Detail " + Model.book.Title;
+    ViewData["Title"] ="Book Detail " + Model.book?.Title;
 }
 
 <div class="container">
@@ -49,13 +49,13 @@
             <div class="row">
                 <div class="col-md-12 text-primary">
                     <span class="label lable-primary">By: </span>
-                    <span class="font-monospace">@Model.book.Title</span>
+                    <span class="font-monospace">@Model.book?.Title</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <p class="description">
-                        @Model.book.Description
+                        @Model.book?.Description
                     </p>
                 </div>
             </div>
@@ -68,9 +68,9 @@
             </div>
             <hr />
             <ul class="list-group">
-                <li class="list-group-item"><span class="font-weight-bold">Category - </span>@Model.book.Category</li>
-                <li class="list-group-item"><span class="font-weight-bold">Total pages - </span>@Model.book.TotalPages</li>
-                <li class="list-group-item"><span class="font-weight-bold">Language - </span>@Model.book.Language</li>
+                <li class="list-group-item"><span class="font-weight-bold">Category - </span>@Model.book?.Category</li>
+                <li class="list-group-item"><span class="font-weight-bold">Total pages - </span>@Model.book?.TotalPages</li>
+                <li class="list-group-item"><span class="font-weight-bold">Language - </span>@Model.book?.Language</li>
             </ul>
         </div>
     </div>

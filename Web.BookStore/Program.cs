@@ -1,14 +1,18 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Web.BookStore.Data;
+using Web.BookStore.Repositery;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BookStoreMVC")));
 
 #if DEBUG
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
-
+builder.Services.AddScoped<BookRepository, BookRepository>();
 var app = builder.Build();
 
 //app.MapGet("/", () => "Hello World!");

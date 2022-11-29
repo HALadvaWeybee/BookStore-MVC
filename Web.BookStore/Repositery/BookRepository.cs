@@ -1,9 +1,32 @@
-﻿using Web.BookStore.Models;
+﻿using Web.BookStore.Data;
+using Web.BookStore.Models;
 
 namespace Web.BookStore.Repositery
 {
     public class BookRepository
     {
+        private readonly BookStoreContext _bookStoreContext;
+
+        public BookRepository(BookStoreContext bookStoreContext)
+        {
+            _bookStoreContext = bookStoreContext;
+        }
+        public int AddBookInDataBase(BookModel model)
+        {
+            var newBook = new Books()
+            {
+                CreatedOn = DateTime.UtcNow,
+                Title = model.Title,
+                Author = model.Author,
+                Description = model.Description,
+                TotalPages = model.TotalPages,
+                UpdatedOn = DateTime.UtcNow,
+            };
+            _bookStoreContext.Books.Add(newBook);    
+            _bookStoreContext.SaveChanges();
+            return newBook.Id;
+           
+        }
         public List<BookModel> GetAllBooks()
         {
             return DataSource();
