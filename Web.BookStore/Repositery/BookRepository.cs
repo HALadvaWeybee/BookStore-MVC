@@ -1,4 +1,6 @@
-﻿using Web.BookStore.Data;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Web.BookStore.Data;
 using Web.BookStore.Models;
 
 namespace Web.BookStore.Repositery
@@ -6,14 +8,16 @@ namespace Web.BookStore.Repositery
     public class BookRepository
     {
         private readonly BookStoreContext _bookStoreContext;
+        private readonly IMapper _mapper;
 
-        public BookRepository(BookStoreContext bookStoreContext)
+        public BookRepository(BookStoreContext bookStoreContext, IMapper mapper)
         {
             _bookStoreContext = bookStoreContext;
+            _mapper = mapper;
         }
-        public int AddBookInDataBase(BookModel model)
+        public async Task<int> AddBookInDataBase(BookModel model)
         {
-            var newBook = new Books()
+            /*var newBook = new Books()
             {
                 CreatedOn = DateTime.UtcNow,
                 Title = model.Title,
@@ -21,41 +25,48 @@ namespace Web.BookStore.Repositery
                 Description = model.Description,
                 TotalPages = model.TotalPages,
                 UpdatedOn = DateTime.UtcNow,
-            };
-            _bookStoreContext.Books.Add(newBook);    
-            _bookStoreContext.SaveChanges();
+            };*/
+            var newBook = _mapper.Map<Books>(model);
+            newBook.CreatedOn = DateTime.UtcNow;
+            newBook.UpdatedOn = DateTime.UtcNow;
+            await _bookStoreContext.Books.AddAsync(newBook);    
+            await _bookStoreContext.SaveChangesAsync();
             return newBook.Id;
            
         }
-        public List<BookModel> GetAllBooks()
+        public async Task<List<BookModel>> GetAllBooks()
         {
-            return DataSource();
+            /*var result = await _bookStoreContext.Books.ToListAsync();
+            var books = new List<BookModel>();
+            if (result.Any() == true)
+            {
+                foreach (var item in result)
+                {
+                    books.Add(new BookModel()
+                    {
+                        Id = item.Id,
+                        Author = item?.Author,
+                        Description = item?.Description,
+                        TotalPages = item.TotalPages,
+                        Language = item?.Language,
+                        Title = item?.Title,
+                        Category = item?.Category
+                    });
+                }
+            }*/
+            return _mapper.Map<List<BookModel>>(await _bookStoreContext.Books.ToListAsync());
         }
 
-        public BookModel GetBookByID(int id)
+        public async Task<BookModel> GetBookByID(int id)
         {
-            return DataSource().Where(x => x.Id == id).FirstOrDefault();
+            var book = await _bookStoreContext.Books.FindAsync(id);
+            return _mapper.Map<BookModel>(book);
         }
 
-        public List<BookModel> SearchBook(string title, string author)
+       /*public List<BookModel> SearchBook(string title, string author)
         {
             return DataSource().Where(x => x.Title.Contains(title) || x.Author.Contains(author)).ToList(); 
-        }
+        }*/
 
-        private List<BookModel> DataSource()
-        {
-            return new List<BookModel>()
-            {
-                new BookModel() { Id = 1,Title = "MVC", Author = "Ram", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 2, Title = "PHY", Author = "lashman", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 3, Title = "COM", Author = "bharat", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 4, Title = "FREM", Author = "shratugan", Description = "This is Description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 5, Title = "ASD", Author = "janki", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 6, Title = "CDF", Author = "kausalya", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 7, Title = "YUI", Author = "sakuni", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 8, Title = "WER", Author = "kansh", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
-                new BookModel() { Id = 9, Title = "QAZ", Author = "ravan", Description = "This is description of book", Category ="Social", Language="English", TotalPages = 101},
-            };
-        }
     }
 }

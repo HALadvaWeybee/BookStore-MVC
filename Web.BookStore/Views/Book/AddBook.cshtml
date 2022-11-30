@@ -1,42 +1,53 @@
-﻿@model BookModel
+﻿@using Web.BookStore.Enums;
+@model BookModel
 @{
     ViewData["title"] = "Add New Book";
 }
 
 <div class="container">
     <h3>Add New Book</h3>
-    @if (ViewBag.IsSuccess)
+    @if (ViewBag.IsSuccess == true)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Holy guacamole!</strong> <a asp-controller="Book" asp-action="GetBook" asp-route-id="@ViewBag.BookId">See All Books</a>.
+            <strong>Holy guacamole!</strong> <a asp-controller="Book" asp-action="GetBook"
+            asp-route-id="@ViewBag.BookId">See Book Detail</a>.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
     <form method="post" asp-action="AddBook" asp-controller="book">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="mb-3">
+            <label asp-for="LanguageEnum" class="form-label"></label>
+            <select asp-for="LanguageEnum" class="form-select" aria-label="Default select example" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
+                <option value="">Open this select Language</option>
+            </select>
+            <span asp-validation-for="LanguageEnum" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="MyField" class="form-label"></label>
+            <input asp-for="MyField" class="form-control" id="exampleInputText1" aria-describedby="textHelp">
+            <span asp-validation-for="MyField" class="text-danger"></span>
+        </div>
         <div class="mb-3">
             <label asp-for="Title" class="form-label">Title</label>
             <input asp-for="Title" class="form-control" id="exampleInputText1" aria-describedby="textHelp">
+            <span asp-validation-for="Title" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Author" class="form-label">Author</label>
             <input asp-for="Author" class="form-control" id="exampleInputText2" aria-describedby="textHelp">
+            <span asp-validation-for="Author" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Description" class="form-label">Description</label>
             <textarea asp-for="Description" class="form-control" placeholder="Leave a description here"
-                      id="floatingTextarea"></textarea>
+                id="floatingTextarea"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        @* <div class="mb-3">
-        <label asp-for="Category" class="form-label">Category</label>
-        <input asp-for="Category" class="form-control" id="exampleInputText4" aria-describedby="textHelp">
-        </div>
-        <div class="mb-3">
-        <label asp-for="Language" class="form-label">Language</label>
-        <input asp-for="Language" class="form-control" id="exampleInputText5" aria-describedby="textHelp">
-        </div> *@
         <div class="mb-3">
             <label asp-for="TotalPages" class="form-label">Total Pages</label>
             <input asp-for="TotalPages" class="form-control" id="exampleInputNumber" aria-describedby="numberHelp">
+            <span asp-validation-for="TotalPages" class="text-danger"></span>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
