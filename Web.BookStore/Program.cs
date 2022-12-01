@@ -13,6 +13,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 #endif
 builder.Services.AddScoped<BookRepository, BookRepository>();
+builder.Services.AddScoped<LanguageRepository, LanguageRepository>();
 var app = builder.Build();
 
 //app.MapGet("/", () => "Hello World!");

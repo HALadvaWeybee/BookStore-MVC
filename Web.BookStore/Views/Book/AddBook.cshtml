@@ -17,16 +17,11 @@
     <form method="post" asp-action="AddBook" asp-controller="book">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">
-            <label asp-for="LanguageEnum" class="form-label"></label>
-            <select asp-for="LanguageEnum" class="form-select" aria-label="Default select example" asp-items="Html.GetEnumSelectList<LanguageEnum>()">
+            <label asp-for="LanguageId" class="form-label"></label>
+            <select asp-for="LanguageId" class="form-select" aria-label="Default select example" asp-items="ViewBag.Languages">
                 <option value="">Open this select Language</option>
             </select>
-            <span asp-validation-for="LanguageEnum" class="text-danger"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="MyField" class="form-label"></label>
-            <input asp-for="MyField" class="form-control" id="exampleInputText1" aria-describedby="textHelp">
-            <span asp-validation-for="MyField" class="text-danger"></span>
+            <span asp-validation-for="LanguageId" class="text-danger"></span>
         </div>
         <div class="mb-3">
             <label asp-for="Title" class="form-label">Title</label>

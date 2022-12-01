@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Web.BookStore.Data;
 
@@ -11,9 +12,11 @@ using Web.BookStore.Data;
 namespace Web.BookStore.Migrations
 {
     [DbContext(typeof(BookStoreContext))]
-    partial class BookStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20221201074636_removeCollectionTypeFromLanguageTabel")]
+    partial class removeCollectionTypeFromLanguageTabel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,9 +59,10 @@ namespace Web.BookStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LanguageId");
+                    b.HasIndex("LanguageId")
+                        .IsUnique();
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Web.BookStore.Data.Languages", b =>
@@ -79,14 +83,14 @@ namespace Web.BookStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages", (string)null);
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("Web.BookStore.Data.Books", b =>
                 {
                     b.HasOne("Web.BookStore.Data.Languages", "Language")
-                        .WithMany("Books")
-                        .HasForeignKey("LanguageId")
+                        .WithOne("Books")
+                        .HasForeignKey("Web.BookStore.Data.Books", "LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -95,7 +99,8 @@ namespace Web.BookStore.Migrations
 
             modelBuilder.Entity("Web.BookStore.Data.Languages", b =>
                 {
-                    b.Navigation("Books");
+                    b.Navigation("Books")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -3,18 +3,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Web.BookStore.Data
 {
-    public class BookStoreContext: DbContext
+    public class BookStoreContext : DbContext
     {
-         public BookStoreContext(DbContextOptions<BookStoreContext> options):base(options)
-         {
-             
-         }
-         public DbSet<Books> Books {get; set;}
+        public BookStoreContext(DbContextOptions<BookStoreContext> options) : base(options)
+        {
 
-        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        // {
-        //     optionsBuilder.UseSqlServer("Server=DESKTOP-VUSIS3U\\MSSQLSERVER01;Database=BookStoreMVC;trusted_connection=true;encrypt=false");
-        //     base.OnConfiguring(optionsBuilder);
-        // }
+        }
+        public DbSet<Books> Books { get; set; }
+        public DbSet<Languages> Languages { get; set; }
     }
+    
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    // {
+    //     optionsBuilder.UseSqlServer("Server=DESKTOP-VUSIS3U\\MSSQLSERVER01;Database=BookStoreMVC;trusted_connection=true;encrypt=false");
+    //     base.OnConfiguring(optionsBuilder);
+    // }
 }
