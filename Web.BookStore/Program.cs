@@ -10,7 +10,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BookStoreMVC")));
 builder.Services.AddAutoMapper(typeof(Program));
 #if DEBUG
-builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(option =>
+{
+    option.HtmlHelperOptions.ClientValidationEnabled= false;
+});
 #endif
 builder.Services.AddScoped<BookRepository, BookRepository>();
 builder.Services.AddScoped<LanguageRepository, LanguageRepository>();

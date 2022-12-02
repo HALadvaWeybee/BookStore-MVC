@@ -1,6 +1,7 @@
 ﻿using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Web.BookStore.Models;
 using Web.BookStore.Repositery;
 
@@ -10,14 +11,16 @@ namespace Web.BookStore.Controllers
     {
         private readonly BookRepository _bookRepository;
         private readonly LanguageRepository _languageRepository;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
         [ViewData]
         public string? Title { get; set; }
 
-        public BookController(BookRepository bookRepository, LanguageRepository languageRepository)
+        public BookController(BookRepository bookRepository, LanguageRepository languageRepository, IWebHostEnvironment webHostEnvironment)
         {
             _bookRepository = bookRepository;
             _languageRepository = languageRepository;
+            _webHostEnvironment = webHostEnvironment;
         }
         public async Task<IActionResult> GetAllBooks()
         {
@@ -73,8 +76,12 @@ namespace Web.BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (bookModel.CoverPhoto != null)
+                {
+                    string folder = "book/cover/";
+                    bookModel.CoverImageURL = await UploadImage(folder, bookModel.CoverPhoto);
+                }
                 int id = await _bookRepository.AddBookInDataBase(bookModel);
-
                 if (id > 0)
                 {
                     return RedirectToAction("AddBook", new { isSuccess = true, bookId = id });
@@ -92,7 +99,14 @@ namespace Web.BookStore.Controllers
             return View();
         }
 
-        
+        private async Task<string> UploadImage(string folderPath, IFormFile file)
+        {
+            folderPath += Guid.NewGuid().ToString() + "_" + file.FileName;
+            string serverFolder = Path.Combine(_webHostEnvironment.WebRootPath, folderPath);
+            await file.CopyToAsync(new FileStream(serverFolder, FileMode.Create));
+            return "/" + folderPath;
+        }
+
     }
 }
 

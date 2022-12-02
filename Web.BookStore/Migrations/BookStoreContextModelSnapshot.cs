@@ -36,6 +36,9 @@ namespace Web.BookStore.Migrations
                     b.Property<string>("Category")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CoverImageURL")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -58,7 +61,7 @@ namespace Web.BookStore.Migrations
 
                     b.HasIndex("LanguageId");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Web.BookStore.Data.Languages", b =>
@@ -79,7 +82,7 @@ namespace Web.BookStore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Languages", (string)null);
+                    b.ToTable("Languages");
                 });
 
             modelBuilder.Entity("Web.BookStore.Data.Books", b =>

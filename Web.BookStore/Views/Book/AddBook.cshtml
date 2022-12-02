@@ -10,11 +10,11 @@
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <strong>Holy guacamole!</strong> <a asp-controller="Book" asp-action="GetBook"
-            asp-route-id="@ViewBag.BookId">See Book Detail</a>.
+                                            asp-route-id="@ViewBag.BookId">See Book Detail</a>.
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
-    <form method="post" asp-action="AddBook" asp-controller="book">
+    <form method="post" asp-action="AddBook" asp-controller="book" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">
             <label asp-for="LanguageId" class="form-label"></label>
@@ -36,7 +36,7 @@
         <div class="mb-3">
             <label asp-for="Description" class="form-label">Description</label>
             <textarea asp-for="Description" class="form-control" placeholder="Leave a description here"
-                id="floatingTextarea"></textarea>
+                      id="floatingTextarea"></textarea>
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
         <div class="mb-3">
@@ -44,7 +44,27 @@
             <input asp-for="TotalPages" class="form-control" id="exampleInputNumber" aria-describedby="numberHelp">
             <span asp-validation-for="TotalPages" class="text-danger"></span>
         </div>
-
+        <div class="mb-3">
+            <label asp-for="CoverPhoto" class="form-label">Default file input example</label>
+            <input class="form-control" asp-for="CoverPhoto" id="formFile">
+            <span asp-validation-for="CoverPhoto" class="text-danger"></span>
+        </div> 
+       @* <div class="mb-3">
+            <label asp-for="CoverImages" class="form-label">Default file input example</label>
+            <input class="form-control" asp-for="CoverImages" id="formFile">
+            <span asp-validation-for="CoverImages" class="text-danger"></span>
+        </div>*@
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
+
+@*@section scripts {
+    <script>
+        function myComplete() {
+            alert("This is from complete");
+        }
+        function mySuccess() {
+            alert("This is from success");
+        }
+    </script>
+}*@
