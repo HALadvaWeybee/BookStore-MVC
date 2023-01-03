@@ -30,10 +30,10 @@ namespace Web.BookStore.Repositery
             var newBook = _mapper.Map<Books>(model);
             newBook.CreatedOn = DateTime.UtcNow;
             newBook.UpdatedOn = DateTime.UtcNow;
-            await _bookStoreContext.Books.AddAsync(newBook);    
+            await _bookStoreContext.Books.AddAsync(newBook);
             await _bookStoreContext.SaveChangesAsync();
             return newBook.Id;
-           
+
         }
         public async Task<List<BookModel>> GetAllBooks()
         {
@@ -58,16 +58,20 @@ namespace Web.BookStore.Repositery
             return _mapper.Map<List<BookModel>>(await _bookStoreContext.Books.ToListAsync());
         }
 
+        public async Task<List<BookModel>> GetTopBooksAsync(int count)
+        {
+            return _mapper.Map<List<BookModel>>(await _bookStoreContext.Books.Take(count).ToListAsync());
+        }
         public async Task<BookModel> GetBookByID(int id)
         {
             var book = await _bookStoreContext.Books.FindAsync(id);
             return _mapper.Map<BookModel>(book);
         }
 
-       /*public List<BookModel> SearchBook(string title, string author)
-        {
-            return DataSource().Where(x => x.Title.Contains(title) || x.Author.Contains(author)).ToList(); 
-        }*/
+        /*public List<BookModel> SearchBook(string title, string author)
+         {
+             return DataSource().Where(x => x.Title.Contains(title) || x.Author.Contains(author)).ToList(); 
+         }*/
 
     }
 }

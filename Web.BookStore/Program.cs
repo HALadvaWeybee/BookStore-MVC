@@ -8,15 +8,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BookStoreMVC")));
+
 builder.Services.AddAutoMapper(typeof(Program));
+
 #if DEBUG
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(option =>
 {
-    option.HtmlHelperOptions.ClientValidationEnabled= false;
+    option.HtmlHelperOptions.ClientValidationEnabled = true;
 });
 #endif
+
 builder.Services.AddScoped<BookRepository, BookRepository>();
 builder.Services.AddScoped<LanguageRepository, LanguageRepository>();
+
 var app = builder.Build();
 
 //app.MapGet("/", () => "Hello World!");
@@ -40,7 +44,7 @@ app.Use(async (context, next) =>
     await context.Response.WriteAsync("Hello i am third middleware response");
 });*/
 
-if(app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
@@ -56,7 +60,7 @@ app.UseStaticFiles(new StaticFileOptions()
 
 app.UseEndpoints(endpoint =>
 {
-   endpoint.MapControllerRoute(name:"Default", pattern:"{controller=Home}/{action=Index}/{id?}");
+    endpoint.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{id?}");
     // tell our application for the use controller and action method
     // endpoint.MapDefaultControllerRoute();
     /*endpoint.MapGet("/", async context =>

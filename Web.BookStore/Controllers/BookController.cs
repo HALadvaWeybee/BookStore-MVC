@@ -25,7 +25,7 @@ namespace Web.BookStore.Controllers
         public async Task<IActionResult> GetAllBooks()
         {
             Title = "All Books";
-            var data = await _bookRepository?.GetAllBooks();
+            var data = await _bookRepository!.GetAllBooks();
 
             return View(data);
         }
@@ -65,7 +65,7 @@ namespace Web.BookStore.Controllers
                new SelectListItem() { Text = "Chinese", Value = "Chinese"},
             };*/
 
-            ViewBag.Languages =new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
+            ViewBag.Languages = new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
             ViewBag.IsSuccess = isSuccess;
             ViewBag.BookId = bookId;
             return View();
@@ -95,7 +95,7 @@ namespace Web.BookStore.Controllers
               new SelectListItem() { Text = "Urdu", Value = "Urdu"},
               new SelectListItem() { Text = "Chinese", Value = "Chinese"},
            };*/
-            ViewBag.Languages =new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
+            ViewBag.Languages = new SelectList(await _languageRepository.GetLanguages(), "Id", "Name");
             return View();
         }
 

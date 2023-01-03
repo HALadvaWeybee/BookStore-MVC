@@ -7,27 +7,11 @@
 <div class="container">
     <h3 class="display-4">All Books</h3>
     <div class="row">
-        @foreach(var book in Model) {
+        @foreach (var book in Model)
+        {
             <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                @* <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
-                    xmlns="@book.CoverImageURL" preserveAspectRatio="xMidYMid slice" focusable="false"
-                    role="image" aria-label="Placeholder: Thumbnail">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#55595c"></rect>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                </svg> *@
-                <img src="@book.CoverImageURL" class="img-thumbnail" alt="No image Found">
-                <div class="card-body">
-                    <h3 class="card-title">@book.Title</h3>
-                    <p class="card-text">@book.Description</p>
-                    <div class="btn-group">
-                        <a asp-route="BookDetailRoute" asp-route-id="@book.Id" asp-fragment="similarbook" class="btn btn-sm btn-outline-secondary">View Details</a>
-                    </div>
-                    <small class="text-muted">@book.Author</small>
-                </div>
+                <partial name="_bookthumbnail" model="book"/>
             </div>
-        </div>
         }
     </div>
 </div>

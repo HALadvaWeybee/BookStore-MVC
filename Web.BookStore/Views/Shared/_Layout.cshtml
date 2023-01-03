@@ -23,75 +23,25 @@
 
 <body>
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-
-                    <img src="~/images/person3.jpg" width="50" height="50" class="rounded-circle"
-                         asp-append-version="true" />
-                    Book Store
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav">
-
-                        <li class="nav-item">
-                            <a class="btn btn-outline-primary">Login</a>
-                            <a class="btn btn-primary">Register</a>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="aboutus">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Home" asp-action="contactus">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Book" asp-action="getallbooks">All Books</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Book" asp-action="AddBook">Add New Book</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-protocol="https" asp-host="abcd.com" asp-controller="Book"
-                               asp-action="getallbooks">New Link</a>
-                        </li>
-
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-    </header>
+    <partial name="_header"/>
 
     @RenderSection("breadcrumb", required:false)
     <main role="main">
         @RenderBody()
     </main>
 
-    <footer class="border-top footer text-muted text-center mt-4">
-        <div class="container">
-            Copyright &copy; Book Store @DateTime.Now.Year
-            <custom-email my-email="himanshuladva0587@gmail.com"></custom-email>
-        </div>
-    </footer>
+    <partial name="_footer"/>
 </body>
 <environment include="Development">
     <script src="~/lib/jquery/jquery.js"></script>   
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.js"></script>
     <script src="~/jquery-validate/jquery.validate.js"></script>
     <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
 </environment>
 <environment exclude="Development">
     <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/twitter-bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/jquery-validate/jquery.validate.min.js"></script>
     <script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.min.js"></script>
