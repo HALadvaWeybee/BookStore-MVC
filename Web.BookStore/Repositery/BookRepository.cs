@@ -1,20 +1,21 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Web.BookStore.Data;
-using Web.BookStore.Helpers;
 using Web.BookStore.Models;
 
 namespace Web.BookStore.Repositery
 {
-    public class BookRepository
+    public class BookRepository : IBookRepository
     {
         private readonly BookStoreContext _bookStoreContext;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _configuration;
 
-        public BookRepository(BookStoreContext bookStoreContext, IMapper mapper)
+        public BookRepository(BookStoreContext bookStoreContext, IMapper mapper, IConfiguration configuration)
         {
             _bookStoreContext = bookStoreContext;
             _mapper = mapper;
+            _configuration = configuration;
         }
         public async Task<int> AddBookInDataBase(BookModel model)
         {
@@ -68,6 +69,10 @@ namespace Web.BookStore.Repositery
             return _mapper.Map<BookModel>(book);
         }
 
+        public string GetApplicaitonName()
+        {
+            return "Book Store App";
+        }
         /*public List<BookModel> SearchBook(string title, string author)
          {
              return DataSource().Where(x => x.Title.Contains(title) || x.Author.Contains(author)).ToList(); 

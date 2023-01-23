@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Web.BookStore.Data;
+using Web.BookStore.Models;
 using Web.BookStore.Repositery;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,8 +19,9 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(opt
 });
 #endif
 
-builder.Services.AddScoped<BookRepository, BookRepository>();
-builder.Services.AddScoped<LanguageRepository, LanguageRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+builder.Services.Configure<NewBookAlertConfig>(builder.Configuration.GetSection("NewBookAlert"));
 
 var app = builder.Build();
 
@@ -60,9 +62,13 @@ app.UseStaticFiles(new StaticFileOptions()
 
 app.UseEndpoints(endpoint =>
 {
-    endpoint.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{id?}");
+    //endpoint.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{id?}");
+
+    //endpoint.MapControllerRoute(name: "About-us", pattern: "about-us", defaults: new { controller = "Home", action = "AboutUs" });
     // tell our application for the use controller and action method
-    // endpoint.MapDefaultControllerRoute();
+    //endpoint.MapDefaultControllerRoute();
+
+    endpoint.MapControllers();
     /*endpoint.MapGet("/", async context =>
     {
        

@@ -7,21 +7,24 @@ using Web.BookStore.Repositery;
 
 namespace Web.BookStore.Controllers
 {
+    [Route("[controller]/[action]")]
     public class BookController : Controller
     {
-        private readonly BookRepository _bookRepository;
-        private readonly LanguageRepository _languageRepository;
+        private readonly IBookRepository _bookRepository;
+        private readonly ILanguageRepository _languageRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         [ViewData]
         public string? Title { get; set; }
 
-        public BookController(BookRepository bookRepository, LanguageRepository languageRepository, IWebHostEnvironment webHostEnvironment)
+        public BookController(IBookRepository bookRepository, ILanguageRepository languageRepository, IWebHostEnvironment webHostEnvironment)
         {
             _bookRepository = bookRepository;
             _languageRepository = languageRepository;
             _webHostEnvironment = webHostEnvironment;
         }
+
+        [Route("~/all-books")]
         public async Task<IActionResult> GetAllBooks()
         {
             Title = "All Books";

@@ -5,7 +5,7 @@ using Web.BookStore.Models;
 
 namespace Web.BookStore.Repositery
 {
-    public class LanguageRepository
+    public class LanguageRepository : ILanguageRepository
     {
         private readonly BookStoreContext _bookStoreContext;
         private readonly IMapper _mapper;

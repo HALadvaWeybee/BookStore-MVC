@@ -3,6 +3,7 @@
 @{
     ViewData["title"] = "Add New Book";
 }
+@inject Web.BookStore.Repositery.ILanguageRepository _repo;
 
 <div class="container">
     <h3>Add New Book</h3>
@@ -18,7 +19,7 @@
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="mb-3">
             <label asp-for="LanguageId" class="form-label"></label>
-            <select asp-for="LanguageId" class="form-select" aria-label="Default select example" asp-items="ViewBag.Languages">
+            <select asp-for="LanguageId" class="form-select" aria-label="Default select example" asp-items="(await _repo.GetLanguages()).Select(x => new SelectListItem() { Text = x.Name, Value = x.Id.ToString()})">
                 <option value="">Open this select Language</option>
             </select>
             <span asp-validation-for="LanguageId" class="text-danger"></span>

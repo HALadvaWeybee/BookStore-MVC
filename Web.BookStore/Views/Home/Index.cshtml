@@ -1,10 +1,13 @@
-﻿@{
+﻿@using Web.BookStore.Repositery;    
+@{
     var data = ViewBag.Data;    
     var data2 = ViewData["properties"] as BookModel;
     var data3 = ViewData["book"] as BookModel;
     // sending data view to layout
     @* ViewData["Title"] ="Home"; *@
 }
+@inject IBookRepository _bookRepository;
+
 
 <section class="jumbotron text-center">
     <div class="container">
@@ -23,15 +26,20 @@
         <p>
             <a href="#" class="btn btn-primary my-2">Search Books</a>
         </p>
+
+       @* @foreach (var item in await _bookRepository.GetAllBooks())
+        {
+            <h2>@item.Title</h2>
+        }*@
     </div>
 </section>
 
 <div class="py-5 bg-light">
     <div class="container">
-        @*@await Component.InvokeAsync("TopBooks")*@
+        @*@await Component.InvokeAsync("TopBooks", new {count = 4})*@
 
         <h3 class="h3">Top books</h3>
-        <vc:top-books count="6"></vc:top-books>
+        @*<vc:top-books count="2"></vc:top-books>*@
        @* <big>Hello from big</big>
         <p big>hello from attribute</p>*@
     </div>

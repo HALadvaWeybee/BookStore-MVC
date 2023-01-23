@@ -4,7 +4,7 @@
     @foreach (var book in Model)
     {
         <div class="col-md-4">
-            <partial name="_bookthumbnail" model="new BookModel()" />
+            <partial name="_bookthumbnail" model="book" />
         </div>
     }
 </div>
