@@ -1,4 +1,5 @@
 ﻿using System.Dynamic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Web.BookStore.Models;
@@ -48,6 +49,7 @@ namespace Web.BookStore.Controllers
              return View();
          }*/
 
+        [Authorize]
         public async Task<IActionResult> AddBook(bool isSuccess = false, int bookId = 0)
         {
             /*ViewBag.Language = GetLanguages().Select(x => new SelectListItem()
@@ -72,6 +74,7 @@ namespace Web.BookStore.Controllers
             ViewBag.BookId = bookId;
             return View();
         }
+
 
         [HttpPost]
         public async Task<IActionResult> AddBook(BookModel bookModel)

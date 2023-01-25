@@ -16,10 +16,10 @@ builder.Services.Configure<IdentityOptions>(option =>
 {
     option.Password.RequiredLength = 5;
     option.Password.RequiredUniqueChars = 0;
-    option.Password.RequireDigit= false;
-    option.Password.RequireLowercase= false;
-    option.Password.RequireUppercase= false;
-    option.Password.RequireNonAlphanumeric= false;
+    option.Password.RequireDigit = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireUppercase = false;
+    option.Password.RequireNonAlphanumeric = false;
 });
 
 #if DEBUG
@@ -81,6 +81,7 @@ app.UseEndpoints(endpoints =>
 });
 
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseEndpoints(endpoint =>
 {
