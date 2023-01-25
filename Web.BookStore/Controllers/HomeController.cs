@@ -7,7 +7,6 @@ using Web.BookStore.Models;
 
 namespace Web.BookStore.Controllers
 {
-    [Route("[controller]/[action]")]
     public class HomeController : Controller
     {
         private readonly NewBookAlertConfig _newBookAlertConfiguration;
@@ -22,6 +21,8 @@ namespace Web.BookStore.Controllers
         public string? Title { get; set; }
         [ViewData]
         public BookModel? Book { get; set; }
+
+        [Route("")]
         public ViewResult Index()
         {
             //var result = _configuration["AppName"];

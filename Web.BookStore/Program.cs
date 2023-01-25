@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Web.BookStore.Data;
@@ -6,11 +7,20 @@ using Web.BookStore.Repositery;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<BookStoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BookStoreMVC")));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
 
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.Configure<IdentityOptions>(option =>
+{
+    option.Password.RequiredLength = 5;
+    option.Password.RequiredUniqueChars = 0;
+    option.Password.RequireDigit= false;
+    option.Password.RequireLowercase= false;
+    option.Password.RequireUppercase= false;
+    option.Password.RequireNonAlphanumeric= false;
+});
 
 #if DEBUG
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(option =>
@@ -21,6 +31,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(opt
 
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+builder.Services.AddTransient<IAccountRepository, AccountRepository>();
 builder.Services.Configure<NewBookAlertConfig>(builder.Configuration.GetSection("NewBookAlert"));
 
 var app = builder.Build();
@@ -60,6 +71,17 @@ app.UseStaticFiles(new StaticFileOptions()
     RequestPath = "/MyStaticFiles"
 });
 
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.Map("/himanshu", async context =>
+    {
+        await context.Response.WriteAsync("Hello Himanshu Ladva!");
+    });
+});
+
+app.UseAuthentication();
+
 app.UseEndpoints(endpoint =>
 {
     //endpoint.MapControllerRoute(name: "Default", pattern: "{controller=Home}/{action=Index}/{id?}");
@@ -85,14 +107,5 @@ app.UseEndpoints(endpoint =>
         await context.Response.WriteAsync(app.Environment.EnvironmentName);*//*
     });*/
 });
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.Map("/himanshu", async context =>
-    {
-        await context.Response.WriteAsync("Hello Himanshu Ladva!");
-    });
-});
-
 
 app.Run();

@@ -1,7 +1,6 @@
 ﻿using System.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Web.BookStore.Models;
 using Web.BookStore.Repositery;
 

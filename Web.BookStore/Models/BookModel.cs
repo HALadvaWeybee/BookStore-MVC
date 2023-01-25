@@ -5,7 +5,7 @@ using Web.BookStore.Helpers;
 namespace Web.BookStore.Models
 {
     public class BookModel
-    {
+    { 
         //[DataType(DataType.EmailAddress)]
         //[Display(Name = "Enter Email Address")]
         //[EmailAddress]
