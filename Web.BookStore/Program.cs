@@ -2,8 +2,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Web.BookStore.Data;
+using Web.BookStore.Helpers;
 using Web.BookStore.Models;
 using Web.BookStore.Repositery;
+using Web.BookStore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +34,11 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation().AddViewOptions(opt
 builder.Services.AddScoped<IBookRepository, BookRepository>();
 builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
 builder.Services.AddTransient<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IUserClaimsPrincipalFactory<ApplicationUser>, ApplicationUserClaimsPrincipalFactory>();
+builder.Services.AddScoped<IUserService, UserService>();
+
 builder.Services.Configure<NewBookAlertConfig>(builder.Configuration.GetSection("NewBookAlert"));
+builder.Services.Configure<SMTPConfigModel>(builder.Configuration.GetSection("SMTPConfig"));
 
 var app = builder.Build();
 
@@ -64,6 +70,9 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.UseStaticFiles();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 // for use of another folder as static files container
 app.UseStaticFiles(new StaticFileOptions()
 {
@@ -80,8 +89,7 @@ app.UseEndpoints(endpoints =>
     });
 });
 
-app.UseAuthentication();
-app.UseAuthorization();
+
 
 app.UseEndpoints(endpoint =>
 {

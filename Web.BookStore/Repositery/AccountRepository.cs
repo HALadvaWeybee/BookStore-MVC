@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Web.BookStore.Models;
+using Web.BookStore.Services;
 
 namespace Web.BookStore.Repositery
 {
@@ -7,11 +8,13 @@ namespace Web.BookStore.Repositery
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IUserService _userSerive;
 
-        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager) 
+        public AccountRepository(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IUserService userSerive) 
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _userSerive = userSerive;
         }
         public async Task<IdentityResult> CreateUserAsync(SignUpModel model)
         {
@@ -36,6 +39,13 @@ namespace Web.BookStore.Repositery
         public async Task SignOutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+        public async Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model)
+        {
+            var userId = _userSerive.GetUserId();
+            var user = await _userManager!.FindByIdAsync(userId);
+            return await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
         }
     }
 }

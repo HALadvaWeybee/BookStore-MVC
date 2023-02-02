@@ -8,5 +8,6 @@ namespace Web.BookStore.Repositery
         Task<IdentityResult> CreateUserAsync(SignUpModel model);
         Task<SignInResult> PasswordSignInAsync(SignInModel model);
         Task SignOutAsync();
+        Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
     }
 }

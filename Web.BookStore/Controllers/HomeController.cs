@@ -4,16 +4,19 @@ using Microsoft.Extensions.Options;
 using System.Diagnostics;
 using System.Dynamic;
 using Web.BookStore.Models;
+using Web.BookStore.Services;
 
 namespace Web.BookStore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly NewBookAlertConfig _newBookAlertConfiguration;
+        private readonly NewBookAlertConfig _newBookAlertConfiguration;  
+        private readonly IUserService _userService;
 
-        public HomeController(IOptions<NewBookAlertConfig> newBookAlertConfiguration)
+        public HomeController(IOptions<NewBookAlertConfig> newBookAlertConfiguration, IUserService userService)
         {
             _newBookAlertConfiguration = newBookAlertConfiguration.Value;
+            _userService = userService;
         }
         [ViewData]
         public string? CustomName { get; set; }
@@ -32,8 +35,12 @@ namespace Web.BookStore.Controllers
             /*var newBook = new NewBookAlertConfig();
             _configuration.Bind("NewBookAlert", newBook);*/
 
+            var userId = _userService.GetUserId();
+            var isAuthenticated = _userService.IsAuthenticated();
+
             bool isDisplay = _newBookAlertConfiguration.DisplayNewBookAlert;
 
+            
             //view data attribute
             CustomName = "by himanshu ladva";
             Title = "Home Ladva";
@@ -59,11 +66,14 @@ namespace Web.BookStore.Controllers
         }
 
         //[Route("{id:int:min(1)}")]
-        public ViewResult AboutUs(int id)
+        [Route("aboutus")]
+        public ViewResult AboutUs()
         {
             Title = "About us";
             return View();
         }
+
+        [Route("contactus")]
         public ViewResult ContactUs()
         {
             Title = "Contact us";
